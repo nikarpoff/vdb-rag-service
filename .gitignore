@@ -1,0 +1,35 @@
+# Python
+__pycache__/
+*.py[oc]
+*.pyc
+build/
+dist/
+wheels/
+*.egg-info
+.venv/
+venv/
+.env
+.madspec/
+.opencode/
+
+# Node
+node_modules/
+npm-debug.log
+yarn-error.log
+
+# Docker
+*.dockerignore
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Build
+client/dist/
+client/build/
