@@ -28,7 +28,7 @@ async def retrieve(query: str = Query(..., description="Search query")):
                 id=result.get("doc_id", ""),
                 filename=result.get("filename", ""),
                 score=round(score, 4),
-                excerpt=result.get("content", "")[:200] + "..."
+                excerpt=(result.get("content", "")[:200] + ("..." if len(result.get("content", "")) > 200 else ""))
             ))
         
         logger.info(f"Search query: '{query}', found {len(search_results)} results")
