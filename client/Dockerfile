@@ -1,13 +1,25 @@
-FROM node:20-alpine
+# build stage
+FROM node:20-slim AS builder
 
 WORKDIR /app
 
-COPY client/package.json client/package-lock.json* ./
+COPY package.json package-lock.json* ./
+RUN npm ci
 
-RUN npm ci --only=production
+COPY . .
+RUN npm run build
 
-COPY client/ .
+
+# runtime stage
+FROM node:20-slim
+
+WORKDIR /app
+
+COPY --from=builder /app/dist ./dist
+COPY package.json ./
+
+RUN npm install --only=production
 
 EXPOSE 3000
 
-CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
+CMD ["npx", "serve", "dist"]
