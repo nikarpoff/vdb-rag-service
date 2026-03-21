@@ -22,7 +22,7 @@ FROM python:3.12-slim
 
 
 # Copy the environment, but not the source code
-COPY --from=builder --chown=app:app /app/.venv /app/.venv
+COPY --from=builder /app /app
 
 # Change the working directory to the `app` directory
 WORKDIR /app

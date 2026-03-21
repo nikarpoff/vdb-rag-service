@@ -16,6 +16,18 @@ services:
       - weaviate_data:/var/lib/weaviate
     restart: unless-stopped
 
+  t2v-transformers:
+    image: cr.weaviate.io/semitechnologies/transformers-inference:sentence-transformers-paraphrase-multilingual-MiniLM-L12-v2
+    environment:
+      ENABLE_CUDA: "1"
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - capabilities: [gpu]
+    ports:
+      - "8081:8080"
+    restart: unless-stopped
 
   server:
     build:
